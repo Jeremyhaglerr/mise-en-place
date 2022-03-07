@@ -1,0 +1,32 @@
+<%- include('../partials/html-head') %>
+<link 
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+  rel="stylesheet" 
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+  crossorigin="anonymous"
+>
+<%- include('../partials/nav') %>
+
+<main class="bg-light">
+  <div class="container py-5 px-3">
+    <div 
+      class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g1 px-4"
+    >
+      <% recipes.forEach(recipe => { %>
+        <div class="col">
+          <a class="text-decoration-none" href="/recipes/<%= recipe._id %>">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><%= recipe.name %> </h5>
+                <h6 class="card-subtitle mb-2 text-muted">⏱️<%= recipe.prep + recipe.cook %> </h6>
+                <p class="card-text"><%= recipe.servings %> </p>
+                <a href="/recipes/<%= recipe._id %> " class="card-link"><button type="button" class="btn btn-primary">View</button></a>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</main>
+<%- include('../partials/footer') %>
