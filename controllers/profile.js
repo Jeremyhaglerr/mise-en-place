@@ -4,7 +4,7 @@ import { Recipe } from '../models/recipe.js'
 function index(req, res) {
   Recipe.find({owner: `${req.user.profile._id}`})
   .then(recipes => {
-    res.render('recipes/index', {
+    res.render('profile/index', {
       recipes,
       title: " My Recipes"
     })

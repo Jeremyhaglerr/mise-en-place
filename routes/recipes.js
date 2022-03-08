@@ -13,6 +13,8 @@ router.get('/:id', recipesCtrl.show)
 
 router.post('/:id/reviews', recipesCtrl.createReview)
 
+router.get('/:id/edit', recipesCtrl.edit)
+
 export {
   router
 }

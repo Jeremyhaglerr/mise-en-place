@@ -16,7 +16,10 @@
                 <h5 class="card-title"><%= recipe.name %> </h5>
                 <h6 class="card-subtitle mb-2 text-muted">⏱️<%= recipe.prep + recipe.cook %> </h6>
                 <p class="card-text"><%= recipe.servings %> </p>
-                <a href="/recipes/<%= recipe._id %> " class="card-link"><button type="button" class="btn btn-primary">View</button></a>
+                <a href="/recipes/<%= recipe._id %>/edit " class="card-link"><button type="button" class="btn btn-light">📝</button></a>
+                <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+                  <a href="/recipes/<%= recipe._id %>/edit " class="card-link"><button type="button" class="btn btn-light">❌</button></a>
+                </form>
               </div>
             </div>
           </a>

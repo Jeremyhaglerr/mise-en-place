@@ -25,10 +25,6 @@ function create(req, res) {
   .then(recipe => {
     res.redirect('/recipes')
   })
-  .catch(err => {
-    console.log(err)
-    res.redirect('/recipes')
-  })
 }
 
 function show(req, res) {
@@ -39,13 +35,25 @@ function show(req, res) {
         recipe,
       })
     })
-}
+  }
 
 function createReview(req, res) {
-  Recipe.findById(req.params.id, function(err, recipe) {
+  Recipe.findById(req.params.id)
+  .exec(function(err, recipe) {
     recipe.reviews.push(req.body)
     recipe.save(function(err) {
       res.redirect(`/recipes/${recipe._id}`)
+    })
+  })
+}
+
+function edit(req, res) {
+  Recipe.findById(req.params.id)
+  .exec(function(err, recipe) {
+    res.render('recipes/edit', {
+      recipe,
+      err,
+      title: "Edit Recipe"
     })
   })
 }
@@ -55,6 +63,7 @@ export {
   newRecipe as new,
   create,
   show,
-  createReview
+  createReview,
+  edit
 
 }
