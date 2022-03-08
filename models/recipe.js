@@ -14,7 +14,7 @@ const recipeSchema = new Schema({
   servings: Number,
   prep: Number,
   cook: Number,
-  ingredients: [{type: Schema.Types.ObjectId, ref: 'Ingredient'}],
+  ingredients: String,
   description: String,
   reviews: [reviewSchema],
   owner: {type: Schema.Types.ObjectId, 'ref': "Profile"}
