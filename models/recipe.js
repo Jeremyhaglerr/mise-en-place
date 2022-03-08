@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const reviewSchema = new Schema({
   content: String,
-  rating: {type: Number, min: 1, max: 5, default: 5}
+  rating: {type: Number, min: 1, max: 5, default: 5},
 }, {
   timestamps: true
 })
@@ -14,7 +14,7 @@ const recipeSchema = new Schema({
   servings: Number,
   prep: Number,
   cook: Number,
-  ingredients: String,
+  ingredients: [{type: Schema.Types.ObjectId, ref: 'Ingredient'}],
   description: String,
   reviews: [reviewSchema],
   owner: {type: Schema.Types.ObjectId, 'ref': "Profile"}
