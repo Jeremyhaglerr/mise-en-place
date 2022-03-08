@@ -2,9 +2,10 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const reviewSchema = new Schema({
+const notesSchema = new Schema({
   content: String,
   rating: {type: Number, min: 1, max: 5, default: 5},
+  owner: {type: Schema.Types.ObjectId, 'ref': "Profile"}
 }, {
   timestamps: true
 })
@@ -16,7 +17,7 @@ const recipeSchema = new Schema({
   cook: Number,
   ingredients: String,
   description: String,
-  reviews: [reviewSchema],
+  notes: [notesSchema],
   owner: {type: Schema.Types.ObjectId, 'ref': "Profile"}
 }, {
   timestamps: true

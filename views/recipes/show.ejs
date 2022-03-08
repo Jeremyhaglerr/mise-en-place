@@ -17,56 +17,52 @@
     <div>Description:</div>
     <div><%= recipe.description %></div> 
   </section>
-<% if (user) { %> 
-  <h2>Reviews</h2>
+<% if (recipe.owner.equals(user?.profile._id)) { %> 
+  <h2>Notes</h2>
   <form 
-    id="add-review-form"
-    action="/recipes/<%= recipe._id %>/reviews"
+    id="add-notes-form"
+    action="/recipes/<%= recipe._id %>/notes"
     method="POST"
   >
-    <label for="content-textarea">Review:</label>
+    <label for="content-textarea">Notes:</label>
     <textarea name="content" id="content-textarea"></textarea>
-    <label for="rating-select">Rating:</label>
-    <select name="rating" id="rating-select">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5" selected>5</option>
-    </select>
-    <button type="submit">Add Review</button>
+    <button type="submit">Add Note</button>
   </form>
   <% } %> 
 
-	<% if (recipe.reviews.length) { %>
+	<% if (recipe.notes.length) { %>
     <table>
       <thead>
         <tr>
           <th>Date</th>
-          <th>Review</th>
-          <th>Rating</th>
+          <th>Note</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <% let total = 0 %> 
-        <% recipe.reviews.forEach(function(review) { %>
-          <% total += review.rating %>
+        <% recipe.notes.forEach(function(note) { %>
           <tr>
-            <td><%= review.createdAt.toLocaleDateString() %></td>
-            <td><%= review.content %></td>
-            <td><%= review.rating %></td>
+            <td><%= note.createdAt.toLocaleDateString() %></td>
+            <td><%= note.content %></td>
+            <td><form action="/recipes/<%= recipe._id %> /<%= note._id %>/edit" method="GET">
+              <button class="btn" type="submit">📝</button>
+            </form></td>
+            <form action="/recipes/<%= recipe._id %> /<%= note._id %>?_method=DELETE" method="POST">
+              <td><button class="btn" type="submit">❌</button>
+            </form></td>
           </tr>
         <% }) %>
         <tr>
           <td colspan="2"></td>
           <td>
-            <strong><%= (total / recipe.reviews.length).toFixed(1) %></strong>
           </td>
         </tr>
       </tbody>
     </table>
   <% } else { %>
-    <h3>No Reviews Yet</h3>
+    <h3>No Notes Yet</h3>
   <% } %>
 </main>
 

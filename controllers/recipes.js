@@ -2,66 +2,84 @@ import { Recipe } from '../models/recipe.js'
 
 function index(req, res) {
   Recipe.find({})
-  .then(recipes => {
-    res.render('recipes/index', {
-      recipes,
-      title: " Browse Recipes"
+    .then(recipes => {
+      res.render('recipes/index', {
+        recipes,
+        title: " Browse Recipes"
+      })
     })
-  })
-  .catch(err => {
-    console.log(err)
-    res.redirect("/recipes")
-  })
+    .catch(err => {
+      console.log(err)
+      res.redirect("/recipes")
+    })
 }
 
 function newRecipe(req, res) {
   res.render('recipes/new', {
-  title: 'New Recipe'})
+    title: 'New Recipe'
+  })
 }
 
 function create(req, res) {
   req.body.owner = req.user.profile._id
   Recipe.create(req.body)
-  .then(recipe => {
-    res.redirect('/recipes')
-  })
+    .then(recipe => {
+      res.redirect('/recipes')
+    })
 }
 
 function show(req, res) {
   Recipe.findById(req.params.id)
-  .exec(function(err, recipe) {
+    .exec(function (err, recipe) {
       res.render('recipes/show', {
-        title: 'Recipe Details', 
+        title: 'Recipe Details',
         recipe,
       })
     })
-  }
+}
 
-function createReview(req, res) {
+function createNote(req, res) {
   Recipe.findById(req.params.id)
-  .exec(function(err, recipe) {
-    recipe.reviews.push(req.body)
-    recipe.save(function(err) {
-      res.redirect(`/recipes/${recipe._id}`)
+    .exec(function (err, recipe) {
+      recipe.notes.push(req.body)
+      recipe.save(function (err) {
+        res.redirect(`/recipes/${recipe._id}`)
+      })
     })
-  })
 }
 
 function edit(req, res) {
   Recipe.findById(req.params.id)
-  .exec(function(err, recipe) {
-    res.render('recipes/edit', {
-      recipe,
-      err,
-      title: "Edit Recipe"
+    .exec(function (err, recipe) {
+      res.render('recipes/edit', {
+        recipe,
+        err,
+        title: "Edit Recipe"
+      })
     })
-  })
 }
 
 function deleteRecipe(req, res) {
-  Recipe.findByIdAndDelete(req.params.id, function(err, recipe){
+  Recipe.findByIdAndDelete(req.params.id, function (err, recipe) {
     res.redirect('/profile')
   })
+}
+
+function deleteNote(req, res) {
+  Recipe.findByIdAndDelete(req.params.id, function (err, recipe) {
+    res.redirect('/profile')
+  })
+}
+
+function updateNote(req, res) {
+  Recipe.findById(req.params.recipeId)
+    .then(recipe => {
+      const note = recipe.notes.id(req.params.noteId)
+      note.update(req.body, { new: true })
+        .then(review => { 
+          res.redirect(`/reviews/${review._id}`)
+        })
+    })
 }
 
 export {
@@ -69,8 +87,8 @@ export {
   newRecipe as new,
   create,
   show,
-  createReview,
+  createNote,
   edit,
-  deleteRecipe as delete
-
+  deleteRecipe as delete,
+  deleteNote
 }

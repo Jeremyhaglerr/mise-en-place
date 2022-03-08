@@ -6,16 +6,17 @@ const router = Router()
 
 router.get('/', recipesCtrl.index )
 router.get('/new', isLoggedIn, recipesCtrl.new)
-
-router.post('/', isLoggedIn, recipesCtrl.create)
-
+router.get('/:id/edit', isLoggedIn, recipesCtrl.edit)
 router.get('/:id', recipesCtrl.show)
 
-router.post('/:id/reviews', isLoggedIn, recipesCtrl.createReview)
-
-router.get('/:id/edit', isLoggedIn, recipesCtrl.edit)
+router.post('/', isLoggedIn, recipesCtrl.create)
+router.post('/:id/notes', isLoggedIn, recipesCtrl.createNote)
 
 router.delete('/:id', isLoggedIn, recipesCtrl.delete)
+router.delete('/:id/:id', isLoggedIn, recipesCtrl.deleteNote)
+
+
+
 
 export {
   router
