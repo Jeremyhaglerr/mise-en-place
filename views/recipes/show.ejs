@@ -1,0 +1,71 @@
+<%- include('../partials/html-head') %>
+<%- include('../partials/nav') %>
+
+<main>
+  <h1><%= title %></h1>
+  <section>
+    <div>Title: </div>
+    <div><%= recipe.name %></div>
+    <div>Servings: </div>
+    <div><%= recipe.servings %></div>
+    <div>Time to Prepare: </div>
+    <div><%= recipe.prep %></div>
+    <div>Time to Cook:</div>
+    <div><%= recipe.cook %></div>
+    <div>Ingredients:</div>
+    <div><%= recipe.ingredients %> </div>
+  </section>{
+<% if (user) { %> 
+  <h2>Reviews</h2>
+  <form 
+    id="add-review-form"
+    action="/recipes/<%= recipe._id %>/reviews"
+    method="POST"
+  >
+    <label for="content-textarea">Review:</label>
+    <textarea name="content" id="content-textarea"></textarea>
+    <label for="rating-select">Rating:</label>
+    <select name="rating" id="rating-select">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5" selected>5</option>
+    </select>
+    <button type="submit">Add Review</button>
+  </form>
+  <% } %> 
+	<% if (recipe.reviews.length) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Review</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% let total = 0 %> 
+        <% recipe.reviews.forEach(function(review) { %>
+          <% total += review.rating %>
+          <tr>
+            <td><%= review.createdAt.toLocaleDateString() %></td>
+            <td><%= review.content %></td>
+            <td><%= review.rating %></td>
+          </tr>
+        <% }) %>
+        <tr>
+          <td colspan="2"></td>
+          <td>
+            <strong><%= (total / recipe.reviews.length).toFixed(1) %></strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% } else { %>
+    <h3>No Reviews Yet</h3>
+  <% } %>
+</main>
+
+
+<%- include('../partials/footer') %>

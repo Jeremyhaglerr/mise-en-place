@@ -9,6 +9,10 @@ router.get('/new', isLoggedIn, recipesCtrl.new)
 
 router.post('/', isLoggedIn, recipesCtrl.create)
 
+router.get('/:id', recipesCtrl.show)
+
+router.post('/:id/reviews', recipesCtrl.createReview)
+
 export {
   router
 }

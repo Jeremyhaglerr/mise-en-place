@@ -31,8 +31,30 @@ function create(req, res) {
   })
 }
 
+function show(req, res) {
+  Recipe.findById(req.params.id)
+  .exec(function(err, recipe) {
+      res.render('recipes/show', {
+        title: 'Recipe Details', 
+        recipe,
+      })
+    })
+}
+
+function createReview(req, res) {
+  Recipe.findById(req.params.id, function(err, recipe) {
+    recipe.reviews.push(req.body)
+    recipe.save(function(err) {
+      res.redirect(`/recipes/${recipe._id}`)
+    })
+  })
+}
+
 export {
   index,
   newRecipe as new,
   create,
+  show,
+  createReview
+
 }
