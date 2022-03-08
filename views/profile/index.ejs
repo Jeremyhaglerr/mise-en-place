@@ -18,7 +18,7 @@
                 <p class="card-text"><%= recipe.servings %> </p>
                 <a href="/recipes/<%= recipe._id %>/edit " class="card-link"><button type="button" class="btn btn-light">📝</button></a>
                 <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
-                  <a href="/recipes/<%= recipe._id %>/edit " class="card-link"><button type="button" class="btn btn-light">❌</button></a>
+                  <button type="submit" class="btn btn-light">❌</button></a>
                 </form>
               </div>
             </div>

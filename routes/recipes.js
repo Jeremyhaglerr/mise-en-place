@@ -11,9 +11,11 @@ router.post('/', isLoggedIn, recipesCtrl.create)
 
 router.get('/:id', recipesCtrl.show)
 
-router.post('/:id/reviews', recipesCtrl.createReview)
+router.post('/:id/reviews', isLoggedIn, recipesCtrl.createReview)
 
-router.get('/:id/edit', recipesCtrl.edit)
+router.get('/:id/edit', isLoggedIn, recipesCtrl.edit)
+
+router.delete('/:id', isLoggedIn, recipesCtrl.delete)
 
 export {
   router

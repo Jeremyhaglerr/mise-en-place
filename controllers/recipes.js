@@ -58,12 +58,19 @@ function edit(req, res) {
   })
 }
 
+function deleteRecipe(req, res) {
+  Recipe.findByIdAndDelete(req.params.id, function(err, recipe){
+    res.redirect('/profile')
+  })
+}
+
 export {
   index,
   newRecipe as new,
   create,
   show,
   createReview,
-  edit
+  edit,
+  deleteRecipe as delete
 
 }
