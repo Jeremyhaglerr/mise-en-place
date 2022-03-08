@@ -14,6 +14,8 @@
     <div><%= recipe.cook %></div>
     <div>Ingredients:</div>
     <div><%= recipe.ingredients %> </div>
+    <div>Description:</div>
+    <div><%= recipe.description %></div> 
   </section>
 <% if (user) { %> 
   <h2>Reviews</h2>
@@ -35,6 +37,7 @@
     <button type="submit">Add Review</button>
   </form>
   <% } %> 
+
 	<% if (recipe.reviews.length) { %>
     <table>
       <thead>
