@@ -4,7 +4,6 @@ const Schema = mongoose.Schema
 
 const notesSchema = new Schema({
   content: String,
-  rating: {type: Number, min: 1, max: 5, default: 5},
   owner: {type: Schema.Types.ObjectId, 'ref': "Profile"}
 }, {
   timestamps: true
