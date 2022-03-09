@@ -4,7 +4,6 @@ const Schema = mongoose.Schema
 
 const notesSchema = new Schema({
   content: String,
-  owner: {type: Schema.Types.ObjectId, 'ref': "Profile"}
 }, {
   timestamps: true
 })
