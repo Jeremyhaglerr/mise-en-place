@@ -9,13 +9,35 @@
     <div>Servings: </div>
     <div><%= recipe.servings %></div>
     <div>Time to Prepare: </div>
-    <div><%= recipe.prep %></div>
+    <% if (recipe.prep > 1) { %> 
+    <div><%= recipe.prep %> Minutes</div>
+    <% } else { %>
+    <div><%= recipe.prep %> Minute</div>
+    <% } %> 
     <div>Time to Cook:</div>
-    <div><%= recipe.cook %></div>
+    <% if (recipe.cook > 1) { %> 
+    <div><%= recipe.cook %> Minutes</div>
+    <% } else { %>
+    <div><%= recipe.cook %> Minute</div>
+    <% } %> 
     <div>Ingredients:</div>
-    <div><%= recipe.ingredients %> </div>
-    <div>Description:</div>
-    <div><%= recipe.description %></div> 
+    <div class="list-group">
+    <% recipe.ingredients.forEach(function(ingredient) { %>
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="checkbox" value="">
+        <%= ingredient %> 
+      </label>
+      <% }) %>
+    </div>
+    <div>Instructions:</div>
+    <div class="list-group">
+      <% recipe.description.forEach(function(step) { %>
+        <label class="list-group-item">
+          <input class="form-check-input me-1" type="checkbox" value="">
+          <%= step %> 
+        </label>
+        <% }) %>
+      </div> 
   </section>
 <% if (recipe.owner.equals(user?.profile._id)) { %> 
   <h2>Notes</h2>
@@ -43,6 +65,13 @@
           <tr>
             <td><%= note.createdAt.toLocaleDateString() %></td>
             <td><%= note.content %></td>
+            <% if (recipe.owner.equals(user?.profile._id)) { %>
+            
+            <td> <a href="/recipes/<%= recipe._id %>/edit " class="card-link"><button type="button" class="btn">📝</button></a></td>
+            <td><form action="/recipes/<%= recipe._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
+            <button class="btn">❌</button>
+            </form></td>
+            <% } %> 
           </tr>
         <% }) %>
         <tr>
