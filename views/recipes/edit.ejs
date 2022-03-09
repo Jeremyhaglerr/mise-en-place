@@ -1,11 +1,11 @@
 <%- include('../partials/html-head') %>
-  <%- include('../partials/nav') %>
+<%- include('../partials/nav') %>
 
   <main>
     <h1><%= title %></h1>
-    <form id="new-form" action="/recipes" method="POST">
+    <form id="new-form" action="/recipes/<%= recipe._id %>?_method=PUT" " method="POST">
       <label for="name-input">Title:</label>
-      <input type="text" name="name" value= <%= recipe.name %>  id="name-input">
+      <input type="text" name="name" value= '<%= recipe.name %>'  id="name-input">
       <br>
       <label for="prep-input">Time to Prep:</label>
       <input type="text" name="prep"  value= <%= recipe.prep %> id="prep-input">
@@ -17,13 +17,44 @@
       <input type="text" name="servings" value= <%= recipe.servings %> id="servings-input">
       <br>
       <label for="ingredients-input">Ingredients:</label>
-      <input type="text" value= <%= recipe.ingredients %> name="ingredients" id="ingredients-input">
+      <input type="text" value= '<%= recipe.ingredients %>' name="ingredients" id="ingredients-input">
       <br>
-      <label for="description-input">Description:</label>
-      <input type="text" value= <%= recipe.description %> name="description"  id="description-input">
+      <label for="description-input">Instructions:</label>
+      <input type="text" value= '<%= recipe.description %>' name="description"  id="description-input">
       <br>
       <button type="submit">Publish Recipe</button>
-    </form>
-  </main>
+      </form>
+      <% if (recipe.notes.length) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% recipe.notes.forEach(function(note) { %>
+              <tr>
+                <td><%= note.createdAt.toLocaleDateString() %></td>
+                <form action="/recipes/<%= recipe._id %>/notes/<%= note._id %>?_method=PUT" method="POST">
+                <td><input type="text" value='<%=note.content%>' name="content"></td>
+                <td><button class="btn" type="submit">📝</button>
+                </form></td>
+                  <td><form action="/recipes/<%= recipe._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
+                    <button class="btn">❌</button>
+                  </form>  </td>
+                </tr>
+                <% }) %>
+    <tr>
+      <td colspan="2"></td>
+      <td>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<% } else { %>
+  <h3>No Notes</h3>
+  <% } %>
+</main>
 
-  <%- include('../partials/footer') %>
+<%- include('../partials/footer') %>

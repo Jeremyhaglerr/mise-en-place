@@ -36,22 +36,13 @@
         <tr>
           <th>Date</th>
           <th>Note</th>
-          <th></th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
-        <% let total = 0 %> 
         <% recipe.notes.forEach(function(note) { %>
           <tr>
             <td><%= note.createdAt.toLocaleDateString() %></td>
             <td><%= note.content %></td>
-            <td><form action="/recipes/<%= recipe._id %> /<%= note._id %>/edit" method="GET">
-              <button class="btn" type="submit">📝</button>
-            </form></td>
-            <form action="/recipes/<%= recipe._id %> /<%= note._id %>?_method=DELETE" method="POST">
-              <td><button class="btn" type="submit">❌</button>
-            </form></td>
           </tr>
         <% }) %>
         <tr>

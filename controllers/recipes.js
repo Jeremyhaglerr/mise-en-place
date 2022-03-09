@@ -59,6 +59,15 @@ function edit(req, res) {
     })
 }
 
+function update(req, res) {
+  for (let key in req.body) {
+    if (req.body[key] === '') delete req.body[key]
+  }
+  Recipe.findByIdAndUpdate(req.params.id, req.body, function (err, recipe) {
+    res.redirect(`/recipes/${recipe._id}/edit`)
+  })
+}
+
 function deleteRecipe(req, res) {
   Recipe.findByIdAndDelete(req.params.id, function (err, recipe) {
     res.redirect('/profile')
@@ -66,21 +75,33 @@ function deleteRecipe(req, res) {
 }
 
 function deleteNote(req, res) {
-  Recipe.findByIdAndDelete(req.params.id, function (err, recipe) {
-    res.redirect('/profile')
-  })
+  Recipe.findById(req.params.recipeId)
+    .then(recipe => {
+      recipe.notes.remove({ _id: req.params.noteId })
+      recipe.save()
+        .then(() => {
+          res.redirect(`/recipes/${recipe._id}/edit`)
+        })
+    })
 }
 
 function updateNote(req, res) {
   Recipe.findById(req.params.recipeId)
     .then(recipe => {
-      const note = recipe.notes.id(req.params.noteId)
-      note.update(req.body, { new: true })
-        .then(review => { 
-          res.redirect(`/reviews/${review._id}`)
-        })
+      recipe.notes.forEach(note => {
+        if (note._id == (req.params.noteId)) {
+          note.content = (req.body.content)
+          recipe.save()
+          .then(() => {
+            res.redirect(`/recipes/${recipe._id}/edit`)
+          })
+
+        }
+      })
     })
-}
+  }
+
+
 
 export {
   index,
@@ -89,6 +110,8 @@ export {
   show,
   createNote,
   edit,
+  update,
   deleteRecipe as delete,
-  deleteNote
+  deleteNote,
+  updateNote
 }

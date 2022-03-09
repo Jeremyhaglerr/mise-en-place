@@ -9,11 +9,16 @@ router.get('/new', isLoggedIn, recipesCtrl.new)
 router.get('/:id/edit', isLoggedIn, recipesCtrl.edit)
 router.get('/:id', recipesCtrl.show)
 
+router.put('/:id', isLoggedIn, recipesCtrl.update)
+router.put('/:recipeId/notes/:noteId', isLoggedIn, recipesCtrl.updateNote)
+
 router.post('/', isLoggedIn, recipesCtrl.create)
 router.post('/:id/notes', isLoggedIn, recipesCtrl.createNote)
 
 router.delete('/:id', isLoggedIn, recipesCtrl.delete)
-router.delete('/:id/:id', isLoggedIn, recipesCtrl.deleteNote)
+router.delete("/:recipeId/notes/:noteId", isLoggedIn, recipesCtrl.deleteNote)
+
+
 
 
 
