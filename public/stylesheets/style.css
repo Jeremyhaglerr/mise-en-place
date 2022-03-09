@@ -45,3 +45,12 @@ main {
 h1 {
   font-size: 3.6rem;
 }
+
+.card-title, .card-header {
+  text-align: center;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: center;
+}
