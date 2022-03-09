@@ -12,10 +12,9 @@
           <a class="text-decoration-none" href="/recipes/<%= recipe._id %>">
             <div class="card" style="width: 18rem;">
               <div class="card-body">
-                <h5 class="card-title"><%= recipe.name %> </h5>
-                <h6 class="card-subtitle mb-2 text-muted">⏱️<%= recipe.prep + recipe.cook %> </h6>
-                <p class="card-text"><%= recipe.servings %> </p>
-                <a href="/recipes/<%= recipe._id %> " class="card-link"><button type="button" class="btn btn-primary">🔍</button></a>
+                <h5 class="card-header"><%= recipe.name %> </h5>
+                <h6 class="card-subtitle mb-2 text-muted">⏱️<%= recipe.prep + recipe.cook %> Minutes</h6>
+                <p class="card-text">Servings:<%= recipe.servings %> </p>
               </div>
             </div>
           </a>
