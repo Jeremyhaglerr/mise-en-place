@@ -1,26 +1,26 @@
 <%- include('../partials/html-head') %>
 <%- include('../partials/nav') %>
 
-<main class="bg-light">
+<main>
   <h1><%= title %></h1>
-  <section>
-    <div>Title: </div>
-    <div><%= recipe.name %></div>
-    <div>Servings: </div>
-    <div><%= recipe.servings %></div>
-    <div>Time to Prepare: </div>
+  <div class="flex-box">
+  <div class=" recipe-content-card">
+    <section>
+    <div><span>Title:</span> <%= recipe.name %></div>
+    <div><span>Servings:</span> <%= recipe.servings %></div>
+    <div><span>Time to Prepare:</span>
     <% if (recipe.prep > 1) { %> 
-    <div><%= recipe.prep %> Minutes</div>
+    <%= recipe.prep %> Minutes</div>
     <% } else { %>
-    <div><%= recipe.prep %> Minute</div>
+    <%= recipe.prep %> Minute</div>
     <% } %> 
-    <div>Time to Cook:</div>
+    <div><span>Time to Cook:</span> 
     <% if (recipe.cook > 1) { %> 
-    <div><%= recipe.cook %> Minutes</div>
+    <%= recipe.cook %> Minutes</div>
     <% } else { %>
-    <div><%= recipe.cook %> Minute</div>
+    <%= recipe.cook %> Minute</div>
     <% } %> 
-    <div>Ingredients:</div>
+    <div><span>Ingredients:</span></div>
     <div class="list-group">
     <% recipe.ingredients.forEach(function(ingredient) { %>
       <label class="list-group-item">
@@ -29,7 +29,7 @@
       </label>
       <% }) %>
     </div>
-    <div>Instructions:</div>
+    <div><span>Instructions:</span></div>
     <div class="list-group">
       <% recipe.description.forEach(function(step) { %>
         <label class="list-group-item">
@@ -40,15 +40,14 @@
       </div> 
   </section>
 <% if (recipe.owner.equals(user?.profile._id)) { %> 
-  <h2>Notes</h2>
+  <span>Add Note</span>
   <form 
     id="add-notes-form"
     action="/recipes/<%= recipe._id %>/notes"
     method="POST"
   >
-    <label for="content-textarea">Notes:</label>
     <textarea name="content" id="content-textarea"></textarea>
-    <button type="submit">Add Note</button>
+    <button class=' btn btn-lg btn-outline-secondary'type="submit">Add Note</button>
   </form>
   <% } %> 
 
@@ -56,20 +55,23 @@
     <table>
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Note</th>
+          <th><span>Date</span></th>
+          <th></th>
+          <th><span>Note</span></th>
         </tr>
       </thead>
       <tbody>
         <% recipe.notes.forEach(function(note) { %>
           <tr>
             <td><%= note.createdAt.toLocaleDateString() %></td>
+            <td></td>
             <td><%= note.content %></td>
+            <td></td>
             <% if (recipe.owner.equals(user?.profile._id)) { %>
             
-            <td> <a href="/recipes/<%= recipe._id %>/edit " class="card-link"><button type="button" class="btn">📝</button></a></td>
+            <td> <a href="/recipes/<%= recipe._id %>/edit "><button type="button" class="btn btn-lg btn-outline-warning">📝</button></a></td>
             <td><form action="/recipes/<%= recipe._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
-            <button class="btn">❌</button>
+            <button class="btn btn-lg btn-outline-warning">❌</button>
             </form></td>
             <% } %> 
           </tr>
@@ -84,6 +86,8 @@
   <% } else { %>
     <h3>No Notes Yet</h3>
   <% } %>
+  </div>
+  </div>
 </main>
 
 

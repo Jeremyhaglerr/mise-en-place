@@ -2,40 +2,36 @@
 
   <%- include('../partials/nav') %>
 
-    <main class="bg-light">
-      <h1>
-        <%= title %>
-      </h1>
+  <main>
+      <h1><%= title %></h1>
+      <div class="flex-box">
       <div class="container py-5 px-3">
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g1 px-4">
           <% recipes.forEach(recipe=> { %>
             <div class="col">
               <a class="text-decoration-none" href="/recipes/<%= recipe._id %>">
-                <div class="card" style="width: 18rem;">
+                <div class="card">
                   <div class="card-body">
-                    <h5 class="card-header">
-                      <%= recipe.name %>
-                    </h5>
-                    <h6 class="card-subtitle mb-2 text-muted">⏱️<%= recipe.prep + recipe.cook %> Minutes
-                    </h6>
-                    <p class="card-text">
-                      Servings: <%= recipe.servings %>
-                    </p>
+                    <h5 class="card-header"><%= recipe.name %></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">⏱️<%= recipe.prep + recipe.cook %> Minutes</h6>
+                    <p class="card-text">Servings: <%= recipe.servings %></p>
                   </div>
                   <div class="card-footer">
-                    <a href="/recipes/<%= recipe._id %>/edit " class="card-link"><button type="button"
-                        class="btn btn-light">📝</button></a>
+                    <a href="/recipes/<%= recipe._id %>/edit " class="card-link"><button type="button" class="btn btn-outline-warning btn-lg edit">📝</button></a>
                     <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
-                      <button type="submit" class="btn btn-light">❌</button>
+                      <button type="submit" class="btn btn-outline-danger btn-lg delete-recipe">❌</button>
+                    </form>
+                  </div>
+                </div>
               </a>
-              </form>
             </div>
+          <% }) %>
         </div>
       </div>
       </a>
       </div>
-      <% }) %>
         </div>
         </div>
+      </div>
     </main>
     <%- include('../partials/footer') %>

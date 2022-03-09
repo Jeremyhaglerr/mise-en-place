@@ -1,14 +1,15 @@
+
 <% if (!user) { %>
   <link rel="stylesheet" href="/stylesheets/siwg.css">
 <% } %>
 </head>
 <body>
 <nav>
-  <a href="/recipes">Browse Recipes 🍽️</a>
+  <a href="/recipes"><button class="btn btn-lg btn-outline-secondary">Browse Recipes 🍽️</button></a>
   <% if (user) { %>
-    <a href="/profile">My Recipes 🧑‍🍳</a>
-    <a href="/recipes/new">Add A Recipe 📄</a>
-    <a href="/auth/logout">Logout 👋</a>
+    <a href="/profile"><button class="btn btn-lg btn-outline-secondary">My Recipes 🧑‍🍳</button></a>
+    <a href="/recipes/new"><button class="btn btn-lg btn-outline-secondary">Add A Recipe 📄</button></a>
+    <a href="/auth/logout"><button class="btn btn-lg btn-outline-secondary">Logout 👋</button></a>
   <% } else { %>
     <a href="/auth/google" class="siwg-link">
       <button type="submit" class="siwg">
