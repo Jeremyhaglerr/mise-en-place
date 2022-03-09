@@ -13,8 +13,8 @@ const recipeSchema = new Schema({
   servings: Number,
   prep: Number,
   cook: Number,
-  ingredients: String,
-  description: String,
+  ingredients: Array,
+  description: Array,
   notes: [notesSchema],
   owner: {type: Schema.Types.ObjectId, 'ref': "Profile"}
 }, {
