@@ -83,7 +83,7 @@ function deleteNote(req, res) {
       recipe.notes.remove({ _id: req.params.noteId })
       recipe.save()
         .then(() => {
-          res.redirect(`/recipes/${recipe._id}/edit`)
+          res.redirect(`/recipes/${recipe._id}`)
         })
     })
 }
@@ -96,7 +96,7 @@ function updateNote(req, res) {
           note.content = (req.body.content)
           recipe.save()
           .then(() => {
-            res.redirect(`/recipes/${recipe._id}/edit`)
+            res.redirect(`/recipes/${recipe._id}`)
           })
 
         }
