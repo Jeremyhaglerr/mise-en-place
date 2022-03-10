@@ -37,7 +37,7 @@ Mise en Place is a communal recipe tracker that allows you to share your favorit
 
 ---
 ## Future Features:
-
+- [ ] Recipe Authors Visible
 - [ ] Search Functionality
 - [ ] Recipe Scaling
 - [ ] Image Hosting
