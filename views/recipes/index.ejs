@@ -12,8 +12,8 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-header"><%= recipe.name %> </h5>
-                <h6 class="card-subtitle mb-2 text-muted">⏱️<%= recipe.prep + recipe.cook %> Minutes</h6>
-                <p class="card-text">Servings:<%= recipe.servings %> </p>
+                <h6 class="card-subtitle mb-2 text-muted">🔪<%= recipe.prep %>  🍳 <%= recipe.cook %></h6>
+                <p class="card-text">Yield: <%= recipe.servings %> </p>
                 <% if (recipe.owner.equals(user?.profile._id)) { %> 
                   <div class="card-footer">
                     <a href="/recipes/<%= recipe._id %>/edit " class="card-link"><button type="button" class="btn btn-outline-warning btn-lg edit">📝</button></a>

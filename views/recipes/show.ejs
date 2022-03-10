@@ -7,19 +7,11 @@
   <div class=" recipe-content-card">
     <section>
     <div style="text-align: center;" ><span><%= recipe.name %></span> </div>
-    <div><span>Servings:</span> <%= recipe.servings %></div>
-    <div><span>Time to Prepare:</span>
-    <% if (recipe.prep > 1 || recipe.prep === 0) { %> 
-    <%= recipe.prep %> Minutes</div>
-    <% } else { %>
-    <%= recipe.prep %> Minute</div>
-    <% } %> 
+    <div><span>Yield:</span> <%= recipe.servings %></div>
+    <div><span>Time to Prepare:</span> 
+    <%= recipe.prep %></div>
     <div><span>Time to Cook:</span> 
-    <% if (recipe.cook > 1 || recipe.cook === 0) { %> 
-    <%= recipe.cook %> Minutes</div>
-    <% } else { %>
-    <%= recipe.cook %> Minute</div>
-    <% } %> 
+    <%= recipe.cook %></div>
     <div><span>Ingredients:</span></div>
     <div class="list-group">
     <% recipe.ingredients.forEach(function(ingredient) { %>
