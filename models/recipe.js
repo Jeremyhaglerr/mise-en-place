@@ -10,9 +10,9 @@ const notesSchema = new Schema({
 
 const recipeSchema = new Schema({
   name: String,
-  servings: Number,
-  prep: Number,
-  cook: Number,
+  servings: String,
+  prep: String,
+  cook: String,
   ingredients: Array,
   description: Array,
   notes: [notesSchema],
