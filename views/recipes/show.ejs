@@ -6,16 +6,16 @@
   <div class="flex-box">
   <div class=" recipe-content-card">
     <section>
-    <div><span>Title:</span> <%= recipe.name %></div>
+    <div style="text-align: center;" ><span><%= recipe.name %></span> </div>
     <div><span>Servings:</span> <%= recipe.servings %></div>
     <div><span>Time to Prepare:</span>
-    <% if (recipe.prep > 1) { %> 
+    <% if (recipe.prep > 1 || recipe.prep === 0) { %> 
     <%= recipe.prep %> Minutes</div>
     <% } else { %>
     <%= recipe.prep %> Minute</div>
     <% } %> 
     <div><span>Time to Cook:</span> 
-    <% if (recipe.cook > 1) { %> 
+    <% if (recipe.cook > 1 || recipe.cook === 0) { %> 
     <%= recipe.cook %> Minutes</div>
     <% } else { %>
     <%= recipe.cook %> Minute</div>
@@ -46,7 +46,7 @@
     action="/recipes/<%= recipe._id %>/notes"
     method="POST"
   >
-    <textarea name="content" id="content-textarea"></textarea>
+    <input name="content" id="content-textarea">
     <button class=' btn btn-lg btn-outline-secondary'type="submit">Add Note</button>
   </form>
   <% } %> 
@@ -55,23 +55,18 @@
     <table>
       <thead>
         <tr>
-          <th><span>Date</span></th>
-          <th></th>
           <th><span>Note</span></th>
         </tr>
       </thead>
       <tbody>
         <% recipe.notes.forEach(function(note) { %>
           <tr>
-            <td><%= note.createdAt.toLocaleDateString() %></td>
-            <td></td>
             <td><%= note.content %></td>
-            <td></td>
             <% if (recipe.owner.equals(user?.profile._id)) { %>
             
             <td> <a href="/recipes/<%= recipe._id %>/edit "><button type="button" class="btn btn-lg btn-outline-warning">📝</button></a></td>
             <td><form action="/recipes/<%= recipe._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
-            <button class="btn btn-lg btn-outline-warning">❌</button>
+            <button class="btn btn-lg btn-outline-danger">❌</button>
             </form></td>
             <% } %> 
           </tr>
