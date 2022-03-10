@@ -24,11 +24,8 @@ function create(req, res) {
   req.body.owner = req.user.profile._id
   req.body.ingredients = req.body.ingredients.split(', ')
   req.body.description = req.body.description.split('/ ')
-  console.log(req.body);
   Recipe.create(req.body)
-    .then(recipe => {
-      res.redirect('/recipes')
-    })
+  res.redirect('/profile')
 }
 
 function show(req, res) {
@@ -67,7 +64,7 @@ function update(req, res) {
     if (req.body[key] === '') delete req.body[key]
   }
   Recipe.findByIdAndUpdate(req.params.id, req.body, function (err, recipe) {
-    res.redirect(`/recipes/${recipe._id}/edit`)
+    res.redirect(`/recipes/${recipe._id}`)
   })
 }
 
