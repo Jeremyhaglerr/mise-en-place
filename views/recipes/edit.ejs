@@ -5,68 +5,63 @@
     <h1><%= title %></h1>
     <div class="flex-box">
       <div class=" recipe-content-card">
-    <form id="new-form" action="/recipes/<%= recipe._id %>?_method=PUT" " method="POST">
-      <label for="name-input"><span>Title:</span></label>
-      <br>
-      <input type="text" name="name" value= '<%= recipe.name %>'  id="name-input" required>
-      <br>
-      <label for="prep-input"><span>Time to Prep:</span></label>
-      <br>
-      <input type="text" name="prep"  value= <%= recipe.prep %> id="prep-input" required>
-      <br>
-      <label for="cook-input"><span>Time to Cook:</span></label>
-      <br>
-      <input type="text" name="cook" value= <%= recipe.cook %> id="cook-input" required>
-      <br>
-      <label for="servings-input"><span>Yield:</span></label>
-      <br>
-      <input type="text" name="servings" value= <%= recipe.servings %> id="servings-input" required>
-      <br>
-      <label for="ingredients-input"><span>Ingredients:</span></label>
-      <br>
-      <% recipe.ingredients.forEach(function(ingredient) { %>
-      <input type="text" value= '<%= ingredient %>' name="ingredients" id="ingredients-input" required >
-      <br>
-      <% }) %>
-      <label for="description-input"><span>Instructions:</span></label>
-      <br>
-      <% recipe.description.forEach(function(step) { %>
-      <input type="text" value= '<%= step %>' name="description"  id="description-input" required >
-      <br>
-      <% }) %>
-      <button type="submit">Publish Recipe</button>
-      </form>
-      <% if (recipe.notes.length) { %>
-        <table>
-          <thead>
-            <tr>
-              <th><span>Note</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% recipe.notes.forEach(function(note) { %>
+        <form id="new-form" action="/recipes/<%= recipe._id %>?_method=PUT" " method="POST">
+          <label for="name-input"><span>Title:</span></label>
+          <br>
+          <input type="text" name="name" value= '<%= recipe.name %>'  id="name-input" required>
+          <br>
+          <label for="prep-input"><span>Time to Prep:</span></label>
+          <br>
+          <input type="text" name="prep"  value= <%= recipe.prep %> id="prep-input" required>
+          <br>
+          <label for="cook-input"><span>Time to Cook:</span></label>
+          <br>
+          <input type="text" name="cook" value= <%= recipe.cook %> id="cook-input" required>
+          <br>
+          <label for="servings-input"><span>Yield:</span></label>
+          <br>
+          <input type="text" name="servings" value= <%= recipe.servings %> id="servings-input" required>
+          <br>
+          <label for="ingredients-input"><span>Ingredients:</span></label>
+          <br>
+          <% recipe.ingredients.forEach(function(ingredient) { %>
+          <input type="text" value= '<%= ingredient %>' name="ingredients" id="ingredients-input" required >
+          <br>
+          <% }) %>
+          <label for="description-input"><span>Instructions:</span></label>
+          <br>
+          <% recipe.description.forEach(function(step) { %>
+          <input type="text" value= '<%= step %>' name="description"  id="description-input" required >
+          <br>
+          <% }) %>
+          <button type="submit">Publish Recipe</button>
+        </form>
+        <% if (recipe.notes.length) { %>
+          <table>
+            <thead>
               <tr>
-                <form action="/recipes/<%= recipe._id %>/notes/<%= note._id %>?_method=PUT" method="POST">
-                <td><input type="text" value='<%=note.content%>' name="content"></td>
-                <td><button class="btn btn-lg btn-outline-warning" type="submit">📝</button>
-                </form></td>
-                  <td><form action="/recipes/<%= recipe._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
-                    <button class="btn btn-lg btn-outline-danger">❌</button>
-                  </form>  </td>
-                </tr>
+                <th><span>Note</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% recipe.notes.forEach(function(note) { %>
+                  <tr>
+                    <form action="/recipes/<%= recipe._id %>/notes/<%= note._id %>?_method=PUT" method="POST">
+                      <td><input type="text" value='<%=note.content%>' name="content"></td>
+                      <td><button class="btn btn-lg btn-outline-warning" type="submit">📝</button></td>
+                    </form>
+                    <form action="/recipes/<%= recipe._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
+                      <td><button class="btn btn-lg btn-outline-danger">❌</button></td>
+                    </form>  
+                  </tr>
                 <% }) %>
-    <tr>
-      <td colspan="2"></td>
-      <td>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<% } else { %>
-  <h3>No Notes</h3>
-  <% } %>
-</div>
-</div>
-</main>
+            </tbody>
+          </table>
+        <% } else { %>
+          <h3>No Notes</h3>
+        <% } %>
+      </div>    
+    </div>
+  </main>
 
 <%- include('../partials/footer') %>

@@ -64,7 +64,7 @@ function update(req, res) {
     if (req.body[key] === '') delete req.body[key]
   }
   console.log(typeof req.body.description)
-  if ( (typeof req.body.ingredients) === 'object') {
+  if ((typeof req.body.ingredients) === 'object') {
     req.body.ingredients = req.body.ingredients.join().split(',')
   } else {
     req.body.ingredients = req.body.ingredients.split(',')
@@ -106,14 +106,14 @@ function updateNote(req, res) {
         if (note._id == (req.params.noteId)) {
           note.content = (req.body.content)
           recipe.save()
-          .then(() => {
-            res.redirect(`/recipes/${recipe._id}`)
-          })
+            .then(() => {
+              res.redirect(`/recipes/${recipe._id}`)
+            })
 
         }
       })
     })
-  }
+}
 
 
 

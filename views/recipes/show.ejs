@@ -4,76 +4,82 @@
 <main>
   <h1><%= title %></h1>
   <div class="flex-box">
-  <div class=" recipe-content-card">
-    <section>
-    <div style="text-align: center;" ><span><%= recipe.name %></span> </div>
-    <div><span>Yield:</span> <%= recipe.servings %></div>
-    <div><span>Time to Prepare:</span> 
-    <%= recipe.prep %></div>
-    <div><span>Time to Cook:</span> 
-    <%= recipe.cook %></div>
-    <div><span>Ingredients:</span></div>
-    <div class="list-group">
-    <% recipe.ingredients.forEach(function(ingredient) { %>
-      <label class="list-group-item">
-        <input class="form-check-input me-1" type="checkbox" value="">
-        <%= ingredient %> 
-      </label>
-      <% }) %>
-    </div>
-    <div><span>Instructions:</span></div>
-    <div class="list-group">
-      <% recipe.description.forEach(function(step) { %>
-        <label class="list-group-item">
-          <input class="form-check-input me-1" type="checkbox" value="">
-          <%= step %> 
-        </label>
-        <% }) %>
-      </div> 
-  </section>
-<% if (recipe.owner.equals(user?.profile._id)) { %> 
-  <span>Add Note</span>
-  <form 
-    id="add-notes-form"
-    action="/recipes/<%= recipe._id %>/notes"
-    method="POST"
-  >
-    <input name="content" id="content-textarea">
-    <button class=' btn btn-lg btn-outline-secondary'type="submit">Add Note</button>
-  </form>
-  <% } %> 
+    <div class=" recipe-content-card">
+      <section>
+        <div style="text-align: center;" >
+          <span><%= recipe.name %></span> 
+        </div>
+        <div>
+          <span>Yield:</span> <%= recipe.servings %>
+        </div>
+        <div>
+          <span>Time to Prepare:</span> <%= recipe.prep %>
+        </div>
+        <div>
+          <span>Time to Cook:</span> <%= recipe.cook %>
+        </div>
+        <div>
+          <span>Ingredients:</span>
+        </div>
+        <div class="list-group">
+          <% recipe.ingredients.forEach(function(ingredient) { %>
+            <label class="list-group-item">
+              <input class="form-check-input me-1" type="checkbox" value=""> <%= ingredient %> 
+            </label>
+          <% }) %>
+        </div>
+        <div>
+          <span>Instructions:</span>
+        </div>
+        <div class="list-group">
+          <% recipe.description.forEach(function(step) { %>
+            <label class="list-group-item">
+              <input class="form-check-input me-1" type="checkbox" value=""> <%= step %> 
+            </label>
+          <% }) %>
+        </div> 
+      </section>
+      <% if (recipe.owner.equals(user?.profile._id)) { %> 
+        <div>
+          <span>Add Note</span>
+        </div>
+        <form id="add-notes-form" action="/recipes/<%= recipe._id %>/notes" method="POST">
+          <input name="content" id="content-textarea">
+          <button class=' btn btn-lg btn-outline-secondary'type="submit">Add Note</button>
+        </form>
+      <% } %> 
 
-	<% if (recipe.notes.length) { %>
-    <table>
-      <thead>
-        <tr>
-          <th><span>Note</span></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% recipe.notes.forEach(function(note) { %>
-          <tr>
-            <td><%= note.content %></td>
-            <% if (recipe.owner.equals(user?.profile._id)) { %>
-            
-            <td> <a href="/recipes/<%= recipe._id %>/edit "><button type="button" class="btn btn-lg btn-outline-warning">📝</button></a></td>
-            <td><form action="/recipes/<%= recipe._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
-            <button class="btn btn-lg btn-outline-danger">❌</button>
-            </form></td>
-            <% } %> 
-          </tr>
-        <% }) %>
-        <tr>
-          <td colspan="2"></td>
-          <td>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  <% } else { %>
-    <h3>No Notes Yet</h3>
-  <% } %>
-  </div>
+      <% if (recipe.notes.length) { %>
+        <table>
+          <thead>
+            <tr>
+              <th><span>Note</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% recipe.notes.forEach(function(note) { %>
+              <tr>
+                <td><%= note.content %></td>
+                <% if (recipe.owner.equals(user?.profile._id)) { %>
+                  <td>
+                    <form action="/recipes/<%= recipe._id %>/edit "> 
+                    <button type="button" class="btn btn-lg btn-outline-warning">📝</button>
+                    </form>
+                  </td>
+                  <td>
+                    <form action="/recipes/<%= recipe._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
+                      <button class="btn btn-lg btn-outline-danger">❌</button>
+                    </form>
+                  </td>
+                <% } %> 
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <h3>No Notes Yet</h3>
+      <% } %>
+    </div>
   </div>
 </main>
 
