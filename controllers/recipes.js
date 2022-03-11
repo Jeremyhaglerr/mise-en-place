@@ -70,7 +70,7 @@ function update(req, res) {
     req.body.ingredients = req.body.ingredients.split(',')
   }
   if ((typeof req.body.description) === 'object') {
-    req.body.description = req.body.description.join().split('/')
+    req.body.description = req.body.description.join(' / ').split('/')
   } else {
     req.body.description = req.body.description.split('/')
   }
