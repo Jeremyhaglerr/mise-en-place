@@ -5,6 +5,10 @@ Mise en Place is a communal recipe tracker that allows you to share your favorit
 
 ---
 
+![Mise en Place](https://mise-en-place-jh.herokuapp.com/recipes)
+
+---
+
 ## Planning Materials
 ![Trello Board](https://trello.com/b/0RP6iKjU/mise-en-place-recipe-tracker)
 ![Wireframe](https://whimsical.com/mise-en-place-recipe-tracker-5nVuVdhQTRAQ8me5hK6UkU)
