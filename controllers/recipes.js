@@ -63,7 +63,6 @@ function update(req, res) {
   for (let key in req.body) {
     if (req.body[key] === '') delete req.body[key]
   }
-  console.log(typeof req.body.description)
   if ((typeof req.body.ingredients) === 'object') {
     req.body.ingredients = req.body.ingredients.join().split(',')
   } else {
@@ -75,7 +74,7 @@ function update(req, res) {
     req.body.description = req.body.description.split('/')
   }
 
-  console.log(req.body);
+
   Recipe.findByIdAndUpdate(req.params.id, req.body, function (err, recipe) {
 
     res.redirect(`/recipes/${recipe._id}`)
