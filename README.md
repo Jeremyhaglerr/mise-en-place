@@ -5,6 +5,12 @@ Mise en Place is a communal recipe tracker that allows you to share your favorit
 
 ---
 
+## Planning Materials
+![Trello Board](https://trello.com/b/0RP6iKjU/mise-en-place-recipe-tracker)
+![Wireframe](https://whimsical.com/mise-en-place-recipe-tracker-5nVuVdhQTRAQ8me5hK6UkU)
+
+---
+
 ## Technologies Used:
 ![HTML5](https://cdn.iconscout.com/icon/free/png-64/html5-42-1175210.png)
 
@@ -29,6 +35,7 @@ Mise en Place is a communal recipe tracker that allows you to share your favorit
 ![Git](https://cdn.iconscout.com/icon/free/png-64/social-285-116319.png)
 
 ---
+
 ## Credits:
 
 - Background svg was found at [heropatterns.com](https://heropatterns.com/)
@@ -36,6 +43,7 @@ Mise en Place is a communal recipe tracker that allows you to share your favorit
 - Readme technologies icons found at [iconscout.com](https://iconscout.com/)
 
 ---
+
 ## Future Features:
 - [ ] Recipe Authors Visible
 - [ ] Search Functionality
