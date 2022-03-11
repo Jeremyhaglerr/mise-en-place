@@ -22,8 +22,8 @@ function newRecipe(req, res) {
 
 function create(req, res) {
   req.body.owner = req.user.profile._id
-  req.body.ingredients = req.body.ingredients.split(', ')
-  req.body.description = req.body.description.split('/ ')
+  req.body.ingredients = req.body.ingredients.split(',')
+  req.body.description = req.body.description.split('/')
   Recipe.create(req.body)
   res.redirect('/profile')
 }
@@ -50,8 +50,6 @@ function createNote(req, res) {
 
 function edit(req, res) {
   Recipe.findById(req.params.id)
-  // req.body.ingredients = req.body.ingredients.forEach(ingredient => {ingredient.split(', ')})
-  // req.body.description = req.body.description.forEach(step => {step.split('/ ')})
     .exec(function (err, recipe) {
       res.render('recipes/edit', {
         recipe,
@@ -65,16 +63,21 @@ function update(req, res) {
   for (let key in req.body) {
     if (req.body[key] === '') delete req.body[key]
   }
+  console.log(typeof req.body.description)
   if ( (typeof req.body.ingredients) === 'object') {
-  req.body.ingredients = req.body.ingredients.forEach(ingredient => {ingredient.split(', ')})
-} else {req.body.ingredients = req.body.ingredients.split(', ')}
-
+    req.body.ingredients = req.body.ingredients.join().split(',')
+  } else {
+    req.body.ingredients = req.body.ingredients.split(',')
+  }
   if ((typeof req.body.description) === 'object') {
-  req.body.description = req.body.description.forEach(step => {step.split('/ ')})
-} else {req.body.description = req.body.description.split('/ ')}
-  console.log(typeof req.body.ingredients)
-  console.log(req.body.ingredients);
+    req.body.description = req.body.description.join().split('/')
+  } else {
+    req.body.description = req.body.description.split('/')
+  }
+
+  console.log(req.body);
   Recipe.findByIdAndUpdate(req.params.id, req.body, function (err, recipe) {
+
     res.redirect(`/recipes/${recipe._id}`)
   })
 }
