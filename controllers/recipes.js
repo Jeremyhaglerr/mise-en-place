@@ -50,6 +50,8 @@ function createNote(req, res) {
 
 function edit(req, res) {
   Recipe.findById(req.params.id)
+  // req.body.ingredients = req.body.ingredients.forEach(ingredient => {ingredient.split(', ')})
+  // req.body.description = req.body.description.forEach(step => {step.split('/ ')})
     .exec(function (err, recipe) {
       res.render('recipes/edit', {
         recipe,
@@ -63,6 +65,15 @@ function update(req, res) {
   for (let key in req.body) {
     if (req.body[key] === '') delete req.body[key]
   }
+  if ( (typeof req.body.ingredients) === 'object') {
+  req.body.ingredients = req.body.ingredients.forEach(ingredient => {ingredient.split(', ')})
+} else {req.body.ingredients = req.body.ingredients.split(', ')}
+
+  if ((typeof req.body.description) === 'object') {
+  req.body.description = req.body.description.forEach(step => {step.split('/ ')})
+} else {req.body.description = req.body.description.split('/ ')}
+  console.log(typeof req.body.ingredients)
+  console.log(req.body.ingredients);
   Recipe.findByIdAndUpdate(req.params.id, req.body, function (err, recipe) {
     res.redirect(`/recipes/${recipe._id}`)
   })
